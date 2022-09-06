@@ -16,15 +16,19 @@ public class TutorialUI : MonoBehaviour
     public void NextTutorial() {
         if (counter >= canvases.Count)
             return;
-        foreach (var c in canvases) {
-            c.alpha = 0; 
-        }
+        Clear();
         canvases[counter].DOFade(1, 0.5f).OnComplete(() =>
         {
-            canvases[counter].DOFade(1, 5f).OnComplete(() => {
-                canvases[counter].DOFade(0, 0.5f);
-                counter++;
-            });
+            counter++;
+            StartCoroutine(waitToClear());
         });
+    }
+    private void Clear() { }
+    IEnumerator waitToClear() {
+        yield return new WaitForSeconds(3);
+        foreach (var c in canvases)
+        {
+            c.alpha = 0;
+        }
     }
 }

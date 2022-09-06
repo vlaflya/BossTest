@@ -39,6 +39,9 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			Application.Quit();
+		}
 		transform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * mouseSensitivityX);
 		verticalLookRotation += Input.GetAxis("Mouse Y") * mouseSensitivityY;
 		verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
